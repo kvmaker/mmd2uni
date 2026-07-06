@@ -1,0 +1,8 @@
+sequenceDiagram
+  participant C as 客户端
+  participant S as 服务器
+  participant D as 数据库
+  C->>S: 登录请求
+  S->>D: 查询用户
+  D-->>S: 用户数据
+  S-->>C: 返回 token
