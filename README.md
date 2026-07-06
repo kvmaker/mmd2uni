@@ -1,5 +1,9 @@
 # mmd2uni
 
+[![CI](https://github.com/kvmaker/mmd2uni/actions/workflows/ci.yml/badge.svg)](https://github.com/kvmaker/mmd2uni/actions/workflows/ci.yml)
+[![npm version](https://img.shields.io/npm/v/mmd2uni.svg)](https://www.npmjs.com/package/mmd2uni)
+[![license](https://img.shields.io/npm/l/mmd2uni.svg)](./LICENSE)
+
 将 Mermaid 图表转换为终端 Unicode 字符图，并针对中文等宽字符做了双宽对齐修正。
 
 ## 简介
@@ -108,7 +112,7 @@ Mermaid 的布局引擎按“字符数”计算列宽，终端却按“显示宽
 
 mmd2uni 的做法：渲染前把每个宽字符替换成一对私有区（PUA，`U+E000` 起）占位符，让布局引擎的列计算和最终显示宽度对齐；渲染完成后再逐字符还原成原始宽字符。
 
-完整算法推导与容量分析见设计文档：[`docs/superpowers/specs/2026-07-06-mmd2uni-design.md`](docs/superpowers/specs/2026-07-06-mmd2uni-design.md) 第 5 节「CJK 补偿层算法」。
+完整算法推导与容量分析见设计文档（位于源码仓库）：[`2026-07-06-mmd2uni-design.md`](https://github.com/kvmaker/mmd2uni/blob/master/docs/superpowers/specs/2026-07-06-mmd2uni-design.md) 第 5 节「CJK 补偿层算法」。
 
 ## 已知限制
 
