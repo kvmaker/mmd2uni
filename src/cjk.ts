@@ -12,7 +12,9 @@ const WIDE_RANGES: Array<[number, number]> = [
   [0x3400, 0x4dbf], // CJK 扩展 A
   [0x4e00, 0x9fff], // CJK 统一表意文字
   [0xa000, 0xa4cf], // 彝文
+  [0xa960, 0xa97f], // 谚文字母扩展 A（Hangul Jamo Extended-A）
   [0xac00, 0xd7a3], // 谚文音节
+  [0xd7b0, 0xd7ff], // 谚文字母扩展 B（Hangul Jamo Extended-B）
   [0xf900, 0xfaff], // CJK 兼容表意文字
   [0xfe30, 0xfe4f], // CJK 兼容形式
   [0xff00, 0xff60], // 全角形式
