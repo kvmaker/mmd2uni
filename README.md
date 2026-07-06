@@ -99,8 +99,8 @@ cat diagram.mmd | mmd2uni [选项]
 
 mmd2uni 基于 [beautiful-mermaid](https://www.npmjs.com/package/beautiful-mermaid) 引擎渲染，并在其输出上叠加中文/宽字符对齐修正：
 
-- **验收目标**（有 golden 基线与对齐性质测试覆盖）：flowchart（`graph`）、sequence（`sequenceDiagram`）
-- **引擎附带能力**（beautiful-mermaid 原生支持，未做专项中文对齐测试）：class（`classDiagram`）、ER（`erDiagram`）、state（`stateDiagram-v2`）、xychart（`xychart-beta`）
+- **验收目标**（有 golden 基线与对齐性质测试覆盖，中文双宽对齐有保证）：flowchart（`graph`）、sequence（`sequenceDiagram`）
+- **引擎附带能力**（beautiful-mermaid 原生支持，已验证可渲染但未做专项中文对齐测试）：class（`classDiagram`）、ER（`erDiagram`）、state（`stateDiagram-v2`）、xychart（`xychart-beta`）
 
 ## 中文对齐原理
 

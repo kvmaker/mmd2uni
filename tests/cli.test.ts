@@ -12,6 +12,24 @@ describe('runCli', () => {
     expect(r.stdout).toContain('用法')
   })
 
+  it('-h 短标志等价 --help', () => {
+    const r = runCli(['-h'], noStdin)
+    expect(r.exitCode).toBe(0)
+    expect(r.stdout).toContain('用法')
+  })
+
+  it('-v 短标志等价 --version', () => {
+    const r = runCli(['-v'], noStdin)
+    expect(r.exitCode).toBe(0)
+    expect(r.stdout).toMatch(/\d+\.\d+\.\d+/)
+  })
+
+  it('--color=none 等号语法', () => {
+    const r = runCli(['--color=none'], () => 'graph LR\n  A --> B')
+    expect(r.exitCode).toBe(0)
+    expect(r.stdout).toContain('┌')
+  })
+
   it('--version 输出版本号', () => {
     const r = runCli(['--version'], noStdin)
     expect(r.exitCode).toBe(0)
