@@ -21,7 +21,7 @@ jobs:
           version: 11.7.0
       - uses: actions/setup-node@v4
         with:
-          node-version: 20
+          node-version: 22
           cache: pnpm
           # registry-url 会在 CI 内写入 .npmrc 指向官方源，
           # 覆盖本地淘宝镜像配置，确保发布到 registry.npmjs.org。

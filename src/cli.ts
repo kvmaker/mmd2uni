@@ -72,7 +72,12 @@ export function runCli(argv: string[], readStdin: () => string | null): CliResul
   const target = parsed.positionals[0]
   let src: string
   if (target === undefined || target === '-') {
-    const piped = readStdin()
+    let piped: string | null
+    try {
+      piped = readStdin()
+    } catch (e) {
+      return { exitCode: 1, stdout: '', stderr: `读取标准输入失败：${(e as Error).message}\n` }
+    }
     if (piped === null) {
       return { exitCode: 2, stdout: '', stderr: `缺少输入：请提供文件路径或通过管道输入\n${HELP}` }
     }
