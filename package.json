@@ -2,6 +2,7 @@
   "name": "mmd2uni",
   "version": "0.1.0",
   "description": "将 mermaid 图表转换为终端 Unicode 字符图（中文双宽对齐）",
+  "license": "MIT",
   "type": "module",
   "bin": { "mmd2uni": "dist/main.js" },
   "files": ["dist"],
