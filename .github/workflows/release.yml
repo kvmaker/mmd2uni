@@ -1,0 +1,38 @@
+name: Release
+
+# 推送 v* tag 时自动发布到 npm，并创建 GitHub Release。
+# 依赖仓库 Secret：NPM_TOKEN（npm 自动发布 granular token，scope=mmd2uni）。
+on:
+  push:
+    tags:
+      - 'v*'
+
+permissions:
+  contents: write
+
+jobs:
+  publish:
+    name: Publish to npm
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: pnpm/action-setup@v4
+        with:
+          version: 11.7.0
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: pnpm
+          # registry-url 会在 CI 内写入 .npmrc 指向官方源，
+          # 覆盖本地淘宝镜像配置，确保发布到 registry.npmjs.org。
+          registry-url: https://registry.npmjs.org
+      - run: pnpm install --frozen-lockfile
+      - run: pnpm build
+      - run: pnpm test
+      - run: npm publish --access public
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+      - name: Create GitHub Release
+        uses: softprops/action-gh-release@v2
+        with:
+          generate_release_notes: true

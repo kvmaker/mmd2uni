@@ -1,0 +1,55 @@
+{
+  "name": "mmd2uni",
+  "version": "0.1.0",
+  "description": "将 mermaid 图表转换为终端 Unicode 字符图（中文双宽对齐）",
+  "license": "MIT",
+  "author": "kvmaker <kvmaker@gmail.com>",
+  "homepage": "https://github.com/kvmaker/mmd2uni#readme",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/kvmaker/mmd2uni.git"
+  },
+  "bugs": {
+    "url": "https://github.com/kvmaker/mmd2uni/issues"
+  },
+  "keywords": [
+    "mermaid",
+    "unicode",
+    "cli",
+    "terminal",
+    "ascii-art",
+    "cjk",
+    "diagram",
+    "flowchart"
+  ],
+  "type": "module",
+  "bin": {
+    "mmd2uni": "dist/main.js"
+  },
+  "files": [
+    "dist"
+  ],
+  "engines": {
+    "node": ">=22"
+  },
+  "packageManager": "pnpm@11.7.0",
+  "publishConfig": {
+    "access": "public",
+    "registry": "https://registry.npmjs.org/"
+  },
+  "scripts": {
+    "build": "tsup",
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "typecheck": "tsc"
+  },
+  "dependencies": {
+    "beautiful-mermaid": "^1.1.3"
+  },
+  "devDependencies": {
+    "@types/node": "^24.0.0",
+    "tsup": "^8.0.0",
+    "typescript": "^5.5.0",
+    "vitest": "^3.0.0"
+  }
+}
