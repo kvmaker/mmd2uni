@@ -32,3 +32,51 @@ export function displayWidth(s: string): number {
   for (const ch of s) w += isWide(ch) ? 2 : 1
   return w
 }
+
+export interface MaskResult {
+  masked: string
+  map: Map<string, { orig: string; pair: string }>
+}
+
+export function mask(src: string): MaskResult {
+  const map: MaskResult['map'] = new Map()
+  let next = PUA_START
+  let masked = ''
+  for (const ch of src) {
+    const c = ch.codePointAt(0)!
+    if (c >= PUA_START && c <= PUA_END) {
+      throw new Error('输入包含 Unicode 私有区（PUA）字符，无法处理')
+    }
+    if (isWide(ch)) {
+      if (next + 1 > PUA_END) {
+        throw new Error('图表过大：宽字符数量超出补偿层容量（约 3200 个），请拆分图表')
+      }
+      const a = String.fromCharCode(next++)
+      const b = String.fromCharCode(next++)
+      map.set(a, { orig: ch, pair: b })
+      masked += a + b
+    } else {
+      masked += ch
+    }
+  }
+  return { masked, map }
+}
+
+export function unmask(rendered: string, map: MaskResult['map']): string {
+  const pairChars = new Set<string>()
+  for (const { pair } of map.values()) pairChars.add(pair)
+  let out = ''
+  const chars = [...rendered]
+  for (let i = 0; i < chars.length; i++) {
+    const info = map.get(chars[i])
+    if (info) {
+      out += info.orig
+      if (chars[i + 1] === info.pair) i++
+    } else if (pairChars.has(chars[i])) {
+      out += ' ' // 占位符对被布局拆开时的兜底
+    } else {
+      out += chars[i]
+    }
+  }
+  return out
+}
